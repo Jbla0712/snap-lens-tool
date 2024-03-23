@@ -22,7 +22,8 @@ Special thanks to user **ghalta22** for finding the fallback patch.
 - Disable Snap Camera fallback mode on lenses.
 - Download lenses from Snapchat.
 
-![download](https://github.com/ptrumpis/snap-lens-tool/assets/116500225/3db4d46f-7d37-47bf-b4c5-8cba07687bad)
+![Capture d'écran 2024-03-23 041733](https://github.com/Jbla0712/snap-lens-tool/assets/13618418/f56a753c-092f-41a9-b186-4c61f58480b1)
+
 
 ## 🚧 Planned Features (Work in Progress)
 - Upload lens/cache to [Snap Camera Server](https://github.com/ptrumpis/snap-camera-server) (v0.8).
