@@ -4,7 +4,7 @@ from io import BytesIO
 import requests
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtWidgets import QPushButton, QDialog, QVBoxLayout, QLineEdit, QLabel, QFileDialog
+from PyQt5.QtWidgets import QPushButton, QDialog, QVBoxLayout, QLineEdit, QLabel, QFileDialog, QApplication
 
 from ..core.lens_crawler import LensCrawler
 
@@ -41,6 +41,11 @@ class DownloadWidget(QDialog):
         self.layout.addWidget(self.label_snapcode)
         self.layout.addWidget(self.download_button)
 
+        self.copy_id_button = QPushButton("Copy ID")
+        self.copy_id_button.clicked.connect(self.copy_id)
+        self.copy_id_button.setEnabled(False)
+        self.layout.addWidget(self.copy_id_button)
+
         self.setLayout(self.layout)
 
     def log(self, str):
@@ -74,6 +79,7 @@ class DownloadWidget(QDialog):
                 self.label_snapcode.setAlignment(Qt.AlignCenter)
 
                 self.download_button.setEnabled(True)
+                self.copy_id_button.setEnabled(True)
                 self.download_url = archive_link
 
     def image_url_to_pixmap(self, url, max_size=200):
@@ -101,3 +107,11 @@ class DownloadWidget(QDialog):
                 response = requests.get(self.download_url)
                 with open(save_path, "wb") as file:
                     file.write(response.content)
+
+    def copy_id(self):
+        # Récupérer l'identifiant de la QLabel contenant l'ID de l'objectif
+        lens_id = self.label_lens_id.text().split(":")[-1].strip()  # Récupérer uniquement l'ID de l'objectif
+
+        # Copier l'identifiant dans le presse-papiers
+        clipboard = QApplication.clipboard()
+        clipboard.setText(lens_id)
